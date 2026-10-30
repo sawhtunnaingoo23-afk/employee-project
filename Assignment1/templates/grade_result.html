@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header compact"><div class="header-inner">
+  <p class="eyebrow">LAB EXERCISE 2</p><h1>Grade Result</h1>
+  <p class="subtitle">Student marks and calculated grade</p>
+</div></header>
+<main class="container single"><section class="card result-card">
+  <div class="grade-result grade-{{ 'a' if grade == 'A' else 'b' if grade == 'B' else 'c' if grade == 'C' else 'f' }}">{{ grade }}</div>
+  <h2>{{ "Congratulations!" if grade != "Fail" else "Keep Practicing" }}</h2>
+  <p class="muted">The grade was calculated from the marks you entered.</p>
+  <dl class="details">
+    <div><dt>Student Name</dt><dd>{{ name }}</dd></div>
+    <div><dt>Marks</dt><dd>{{ "%.2f"|format(marks) }} / 100</dd></div>
+    <div><dt>Grade</dt><dd>{{ grade }}</dd></div>
+  </dl>
+  <a class="button-link" href="{{ url_for('grade_calculator_page') }}">Calculate Another Grade</a>
+  <a class="back-link" href="{{ url_for('home') }}">← Back to Home</a>
+</section></main>
+<footer>Built with Python and Flask</footer>
+</body></html>

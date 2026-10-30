@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Calculator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header compact"><div class="header-inner">
+  <p class="eyebrow">LAB EXERCISE 2</p><h1>Grade Calculator</h1>
+  <p class="subtitle">Calculate a student's grade from marks.</p>
+</div></header>
+<main class="container single"><section class="card">
+  <div class="section-heading"><span class="number">02</span><div>
+    <h2>Enter Student Marks</h2><p>Marks must be between 0 and 100.</p>
+  </div></div>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form action="{{ url_for('calculate_grade') }}" method="POST">
+    <label for="grade_student_name">Student Name</label>
+    <input type="text" id="grade_student_name" name="grade_student_name" placeholder="e.g. Su Su" required>
+    <label for="marks">Marks</label>
+    <input type="number" id="marks" name="marks" min="0" max="100" step="any" placeholder="Enter marks (0-100)" required>
+    <button type="submit">Calculate Grade</button>
+  </form>
+  <div class="grade-table-wrap"><h3>Grade Criteria</h3>
+    <table><thead><tr><th>Marks</th><th>Grade</th></tr></thead><tbody>
+      <tr><td>80–100</td><td><span class="grade grade-a">A</span></td></tr>
+      <tr><td>60–below 80</td><td><span class="grade grade-b">B</span></td></tr>
+      <tr><td>40–below 60</td><td><span class="grade grade-c">C</span></td></tr>
+      <tr><td>Below 40</td><td><span class="grade grade-f">Fail</span></td></tr>
+    </tbody></table>
+  </div>
+  <a class="back-link" href="{{ url_for('home') }}">← Back to Home</a>
+</section></main>
+<footer>Built with Python and Flask</footer>
+</body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header compact"><div class="header-inner">
+  <p class="eyebrow">LAB EXERCISE 1</p><h1>Student Information</h1>
+  <p class="subtitle">Submitted information</p>
+</div></header>
+<main class="container single"><section class="card result-card">
+  <div class="success-icon">✓</div><h2>Information Submitted Successfully</h2>
+  <p class="muted">Please check the submitted student details.</p>
+  <dl class="details">
+    <div><dt>Student Name</dt><dd>{{ name }}</dd></div>
+    <div><dt>Student ID</dt><dd>{{ student_id }}</dd></div>
+    <div><dt>Email Address</dt><dd>{{ email }}</dd></div>
+  </dl>
+  <a class="button-link" href="{{ url_for('student_form') }}">Enter Another Student</a>
+  <a class="back-link" href="{{ url_for('home') }}">← Back to Home</a>
+</section></main>
+<footer>Built with Python and Flask</footer>
+</body></html>

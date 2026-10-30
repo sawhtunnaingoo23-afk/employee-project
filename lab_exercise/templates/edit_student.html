@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Student Management System</h1>
+    
+    <div class="navigation">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('students') }}">View Students</a>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Edit Form (Double Form မဖြစ်စေဘဲ သပ်ရပ်သော Card ပုံစံ) -->
+    <form method="POST">
+        <div class="form-heading">
+            <h2>Edit Student Information</h2>
+            <p>Update the student's name and email address below.</p>
+        </div>
+
+        <label for="name">Student Name</label>
+        <input type="text" id="name" name="name" value="{{ student.name }}" placeholder="Enter full name" required>
+        
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" value="{{ student.email }}" placeholder="name@example.com" required>
+        
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">Save Changes</button>
+            <a href="{{ url_for('students') }}" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>

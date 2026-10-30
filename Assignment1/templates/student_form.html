@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header compact"><div class="header-inner">
+  <p class="eyebrow">LAB EXERCISE 1</p><h1>Student Information</h1>
+  <p class="subtitle">Enter the student's details below.</p>
+</div></header>
+<main class="container single"><section class="card">
+  <div class="section-heading"><span class="number">01</span><div>
+    <h2>Student Details</h2><p>All fields are required.</p>
+  </div></div>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form action="{{ url_for('student_info') }}" method="POST">
+    <label for="student_name">Student Name</label>
+    <input type="text" id="student_name" name="student_name" placeholder="e.g. Aung Aung" required>
+    <label for="student_id">Student ID</label>
+    <input type="text" id="student_id" name="student_id" placeholder="e.g. STU001" required>
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="e.g. student@example.com" required>
+    <button type="submit">Submit Student Information</button>
+  </form>
+  <a class="back-link" href="{{ url_for('home') }}">← Back to Home</a>
+</section></main>
+<footer>Built with Python and Flask</footer>
+</body></html>
