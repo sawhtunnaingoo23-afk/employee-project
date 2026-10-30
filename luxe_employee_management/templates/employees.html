@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Employees{% endblock %}
+{% block breadcrumb %}Employees{% endblock %}
+{% block content %}
+<div class="welcome-row"><div><div class="eyebrow">PEOPLE DIRECTORY</div><h1>Your people<span class="gold-dot">.</span></h1><p class="subheading">Every individual makes a difference. Meet your team.</p></div><a class="btn btn-primary" href="{{ url_for('add_employee') }}">＋ Add employee</a></div>
+<div class="directory-toolbar"><div><strong>All employees</strong><span>{{ employees|length }} record{{ '' if employees|length == 1 else 's' }}</span></div><form method="GET" class="search-form"><span>⌕</span><input name="q" value="{{ q }}" placeholder="Search name, ID, department..."><button type="submit">Search</button>{% if q %}<a href="{{ url_for('view_employees') }}">Clear</a>{% endif %}</form></div>
+<div class="table-card directory-table"><table><thead><tr><th>EMPLOYEE</th><th>CONTACT</th><th>DEPARTMENT</th><th>POSITION</th><th>SALARY</th><th>JOINED</th><th>ACTIONS</th></tr></thead><tbody>
+{% for employee in employees %}<tr><td><div class="person-cell"><div class="person-avatar">{{ employee.full_name[:1]|upper }}</div><div><strong>{{ employee.full_name }}</strong><small>{{ employee.employee_id }}</small></div></div></td><td><div class="contact-cell">{{ employee.email }}<small>{{ employee.phone }}</small></div></td><td><span class="dept-pill">{{ employee.department }}</span></td><td>{{ employee.position }}</td><td class="salary">${{ "{:,.2f}".format(employee.salary) }}</td><td>{{ employee.joining_date }}</td><td><div class="action-row"><a class="icon-action" title="Edit employee" href="{{ url_for('edit_employee', id=employee.employee_id) }}">✎</a><form method="POST" action="{{ url_for('delete_employee', id=employee.employee_id) }}" data-confirm="Delete {{ employee.full_name }}? This action cannot be undone."><button class="icon-action danger" title="Delete employee" type="submit">⌫</button></form></div></td></tr>
+{% else %}<tr><td colspan="7" class="empty-state">{% if q %}No employees match “{{ q }}”. Try another search.{% else %}No employees have been registered yet. <a href="{{ url_for('add_employee') }}">Add your first employee</a>.{% endif %}</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}
